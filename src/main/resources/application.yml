@@ -1,0 +1,95 @@
+spring:
+  redis:
+    database: 0
+    host: 1.117.144.92
+    port: 6379
+    password: zkxaihxb2
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB #单个文件最大大小
+      max-request-size: 1024MB #上传数据总大小
+
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+    prefix: classpsth:/templates
+    suffix: html
+    mode: HTML
+    check-template-location: false
+
+  security:
+    user:
+      name: helen
+      password: asdfghjkl456258
+
+
+  datasource:
+    username: root
+    password: zkxaihxb2
+    url: jdbc:mysql://1.117.144.92:33061/gosling_book_bar?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    #serverTimezone=GMT%2b8
+    #  wbsystemdb?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+    #jwt: data :这个路径是根据JWTUtil中的
+    #@ConfigurationProperties("jwt.data")配置的
+
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+      write_dates_as_timestamps: false
+    time-zone: GMT+08:00
+    date-format: yyyy-MM-dd HH:mm:ss
+
+
+  mybatis-plus:
+    configuration:
+      map-underscore-to-camel-case: true
+      auto-mapping-behavior: full
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    mapper-locations: classpath*:mapper/**/*Mapper.xml
+    global-config:
+      # 逻辑删除配置
+      db-config:
+        # 删除前
+        logic-not-delete-value: 1
+        # 删除后
+        logic-delete-value: 0
+
+  jwt:
+    data:
+      #    jwt加密密钥
+      SECRET: jwt-token-secret
+      #    jwt储存的请求头Authorization固定写法
+      tokenHeader: Authorization
+      #      jwt的过期时间(60s*60min*24h*7day)
+      expiration: 604800
+      #    jwt负载中拿到的头信息
+      tokenHead: Bearer
+
+  mvc:
+    #1.静态资源的过滤规则（在静态资源目录下，只有以/resources/开头的才能显示，不然不能显示）
+    static-path-pattern: /resources/**
+    #5.（spring:resources下的）设置静态资源的路径（默认的是classpath:/static,classpath:/public,classpath:/resources,classpath:/META-INF/resource）
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+
+  jpa:
+    show-sql: true
+    database: mysql
+    hibernate:
+      ddl-auto: update
+
+
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:static/
+
+
+server:
+  tomcat:
+    max-http-header-size=81920:
+  port: 9090
+
